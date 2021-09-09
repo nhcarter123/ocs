@@ -1,12 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-// import logo from 'frontend/logo.svg';
+// import logo from 'app/logo.svg';
 
-import { persistor, store } from 'backend/store/store';
-import 'frontend/App.css';
+import { persistor, store } from 'state/store/store';
+import 'app/App.css';
 import { PersistGate } from 'redux-persist/integration/react';
 
-import Test from 'frontend/components/Test';
+import Test from 'app/components/Test';
 
 const App = (): JSX.Element => {
   // const players = useSelector('opl');
@@ -35,7 +35,7 @@ const App = (): JSX.Element => {
   //       </button>
   //       <img src={logo} className="App-logo" alt="logo" />
   //       <p>
-  //         Edit <code>src/frontend/App.tsx</code> and save to reload.
+  //         Edit <code>src/app/App.tsx</code> and save to reload.
   //       </p>
   //       <a
   //         className="App-link"

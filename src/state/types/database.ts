@@ -1,4 +1,4 @@
-import { Player } from 'backend/types/player';
+import { Player } from 'state/types/player';
 
 export type DBSchema = {
   players: Player[];

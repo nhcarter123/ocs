@@ -3,7 +3,7 @@ import {
   CreatePlayerAction,
   DeletePlayerAction,
   UpdatePlayerRatingAction
-} from 'backend/types/player';
+} from 'state/types/player';
 
 export type StateSchema = {
   players: Player[];

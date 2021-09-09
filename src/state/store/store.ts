@@ -2,7 +2,7 @@ import { createStore, combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import playersReducer from 'backend/store/playersReducer';
+import players from 'state/store/playerReducer';
 
 const persistConfig = {
   key: 'root',
@@ -11,7 +11,9 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(
   persistConfig,
-  combineReducers(playersReducer)
+  combineReducers({
+    players
+  })
 );
 const store = createStore(persistedReducer);
 const persistor = persistStore(store);

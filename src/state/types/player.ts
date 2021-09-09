@@ -1,4 +1,4 @@
-import { ActionTypes } from 'backend/types/store';
+import { ActionTypes } from 'state/types/store';
 
 export type Player = {
   id: string;
