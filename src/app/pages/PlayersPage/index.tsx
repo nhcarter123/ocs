@@ -5,8 +5,8 @@ import AddPlayerButton from 'app/components/AddPlayerButton';
 const PlayersPage = (): JSX.Element => {
   return (
     <div>
-      <PlayersList />
       <AddPlayerButton />
+      <PlayersList />
     </div>
   );
 };

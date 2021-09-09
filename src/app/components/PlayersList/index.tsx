@@ -43,6 +43,13 @@ const App = (): JSX.Element => {
     }
   ];
 
-  return <Table columns={columns} dataSource={players} size={'small'} />;
+  return (
+    <Table
+      columns={columns}
+      dataSource={players}
+      size={'small'}
+      pagination={{ pageSize: 50 }}
+    />
+  );
 };
 export default App;
