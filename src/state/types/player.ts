@@ -5,6 +5,7 @@ export type Player = {
   firstName: string;
   lastName: string;
   rating: number;
+  matches: number;
 };
 
 export type CreatePlayerPayload = {
@@ -35,4 +36,19 @@ export type DeletePlayerAction = {
 export type UpdatePlayerRatingAction = {
   type: ActionTypes.updateRating;
   payload?: UpdateRatingPayload;
+};
+
+export type CreateParams = {
+  players: Player[];
+  payload: CreatePlayerPayload;
+};
+
+export type DeleteParams = {
+  players: Player[];
+  payload: DeletePlayerPayload;
+};
+
+export type UpdateRatingParams = {
+  players: Player[];
+  payload: UpdateRatingPayload;
 };

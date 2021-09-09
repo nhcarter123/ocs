@@ -1,31 +1,16 @@
 import HashService from 'state/services/hashService';
 import {
-  CreatePlayerPayload,
-  DeletePlayerPayload,
   Player,
-  UpdateRatingPayload
+  CreateParams,
+  DeleteParams,
+  UpdateRatingParams
 } from 'state/types/player';
-
-type CreateParams = {
-  players: Player[];
-  payload: CreatePlayerPayload;
-};
-
-type DeleteParams = {
-  players: Player[];
-  payload: DeletePlayerPayload;
-};
-
-type UpdateRatingParams = {
-  players: Player[];
-  payload: UpdateRatingPayload;
-};
 
 export default class PlayerService {
   static create(params: CreateParams): Player[] {
     const id = HashService.generate();
 
-    return [...params.players, { id, ...params.payload }];
+    return [...params.players, { id, matches: 0, ...params.payload }];
   }
 
   static delete(params: DeleteParams): Player[] {

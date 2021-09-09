@@ -1,53 +1,29 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-// import logo from 'app/logo.svg';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import 'app/App.css';
+import 'antd/dist/antd.css';
 
 import { persistor, store } from 'state/store/store';
-import 'app/App.css';
-import { PersistGate } from 'redux-persist/integration/react';
 
-import Test from 'app/components/Test';
+import PlayersPage from 'app/pages/PlayersPage';
+import TournamentsPage from 'app/pages/TournamentsPage';
+
+import { Pages } from 'app/types/pages';
 
 const App = (): JSX.Element => {
-  // const players = useSelector('opl');
-  // console.log(data);
-
   return (
     <Provider store={store}>
       <PersistGate loading={<div>lod</div>} persistor={persistor}>
-        <Test />
+        <Router>
+          <Redirect from={'/'} exact to={Pages.players} />
+          <Route path={Pages.players} component={PlayersPage} />
+          <Route path={Pages.tournaments} component={TournamentsPage} />
+        </Router>
       </PersistGate>
     </Provider>
   );
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <button
-  //         onClick={(): void => {
-  //           PlayerService.create({
-  //             firstName: 'nate',
-  //             lastName: 'carter',
-  //             rating: 1200
-  //           });
-  //         }}
-  //       >
-  //         test
-  //       </button>
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/app/App.tsx</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
 };
 
 export default App;
