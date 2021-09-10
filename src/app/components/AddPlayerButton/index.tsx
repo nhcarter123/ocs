@@ -22,8 +22,8 @@ const App = (): JSX.Element => {
       onClick={(): void => {
         dispatch(
           createPlayerAction({
-            firstName: 'first',
-            lastName: 'last',
+            firstName: `first ${Math.round(Math.random() * 10)}`,
+            lastName: `last ${Math.round(Math.random() * 10)}`,
             rating: 500 + Math.round(Math.random() * 1500)
           })
         );
