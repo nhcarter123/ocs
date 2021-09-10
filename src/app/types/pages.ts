@@ -1,4 +1,5 @@
 export enum Pages {
   players = '/players',
-  tournaments = '/tournaments'
+  tournaments = '/tournaments',
+  settings = '/settings'
 }

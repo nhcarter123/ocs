@@ -19,3 +19,8 @@ Start the app
 ```
 npm run start
 ```
+
+### TODO
+
+- implement css (makestyles)
+- implement add player form

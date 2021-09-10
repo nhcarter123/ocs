@@ -1,11 +1,24 @@
 import React from 'react';
 import { Table } from 'antd';
 import { useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/styles';
+import naturalCompare from 'string-natural-compare';
 import { StateSchema } from 'state/types/store';
 import { Player } from 'state/types/player';
-import naturalCompare from 'string-natural-compare';
+
+// todo move to other folder
+const useStyles = makeStyles({
+  root: {
+    marginTop: '40px',
+
+    '& .ant-table-sticky-holder': {
+      top: '64px !important'
+    }
+  }
+});
 
 const App = (): JSX.Element => {
+  const classes = useStyles();
   const players = useSelector((state: StateSchema) => state.players);
 
   const columns = [
@@ -45,10 +58,12 @@ const App = (): JSX.Element => {
 
   return (
     <Table
+      sticky
       columns={columns}
       dataSource={players}
       size={'small'}
       pagination={{ pageSize: 50 }}
+      className={classes.root}
     />
   );
 };

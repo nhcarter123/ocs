@@ -2,6 +2,7 @@
   "name": "ocs",
   "version": "0.1.0",
   "dependencies": {
+    "@material-ui/styles": "^4.11.4",
     "antd": "^4.16.13",
     "cra-template-typescript": "1.1.2",
     "lodash": "^4.17.21",
