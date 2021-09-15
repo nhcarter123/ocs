@@ -22,5 +22,6 @@ npm run start
 
 ### TODO
 
-- implement css (makestyles)
-- implement add player form
+- reorganize css (makestyles)
+- implement editable player table
+- implement tournament logic
