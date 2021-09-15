@@ -77,11 +77,8 @@ const App = (): JSX.Element => {
         </Menu>
       </Sider>
 
-      <Layout
-        className="site-layout"
-        style={{ padding: '0 50px', marginTop: 64 }}
-      >
-        <Content style={{ padding: '0 24px', minHeight: 280 }}>
+      <Layout className="site-layout" style={{ marginTop: 64 }}>
+        <Content style={{ minHeight: 280, padding: '0 40px' }}>
           <Redirect from={'/'} exact to={Pages.players} />
           <Route path={Pages.players} component={PlayersPage} />
           <Route path={Pages.tournaments} component={TournamentsPage} />

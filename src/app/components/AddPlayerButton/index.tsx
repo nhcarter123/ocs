@@ -1,37 +1,41 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { createPlayerAction } from 'app/actions/player';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { Button, Modal } from 'antd';
+import AddPlayerForm from 'app/components/AddPlayerForm';
 
 // todo move to other folder
 const useStyles = makeStyles({
   root: {
-    position: 'fixed',
-    top: '150px',
-    left: '200px'
+    position: 'sticky',
+    top: '50%',
+    transform: 'translate(0, -50%)',
+    height: '60px'
   }
 });
 
-const App = (): JSX.Element => {
+const AddPlayerButton = (): JSX.Element => {
   const classes = useStyles();
-  const dispatch = useDispatch();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = (): void => setIsModalVisible(true);
+  const handleCancel = (): void => setIsModalVisible(false);
 
   return (
-    <button
-      className={classes.root}
-      onClick={(): void => {
-        dispatch(
-          createPlayerAction({
-            firstName: `first ${Math.round(Math.random() * 10)}`,
-            lastName: `last ${Math.round(Math.random() * 10)}`,
-            rating: 500 + Math.round(Math.random() * 1500)
-          })
-        );
-      }}
-    >
-      Add Player
-    </button>
+    <>
+      <Button className={classes.root} type="primary" onClick={showModal}>
+        Add Player
+      </Button>
+      <Modal
+        title="Add Player"
+        visible={isModalVisible}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <AddPlayerForm />
+      </Modal>
+    </>
   );
 };
 
-export default App;
+export default AddPlayerButton;
