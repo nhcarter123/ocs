@@ -1,12 +1,12 @@
 import React from 'react';
 import AddTournamentButton from 'app/components/AddTournamentButton';
-import TournamentsList from 'app/components/TournamentsList';
+import TournamentsTable from 'app/components/TournamentsTable';
 
 const TournamentsPage = (): JSX.Element => {
   return (
     <div>
       <AddTournamentButton />
-      <TournamentsList />
+      <TournamentsTable />
     </div>
   );
 };

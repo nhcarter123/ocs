@@ -3,6 +3,10 @@ export type Tournament = {
   name: string;
   description?: string;
   pools: Pool[];
+  date: Date;
+  playerCount?: number;
+  maxRating?: number;
+  avgRating?: number;
 };
 
 export type Pool = {
@@ -11,6 +15,7 @@ export type Pool = {
 
 export type CreateTournamentPayload = {
   name: string;
+  date: Date;
   description?: string;
 };
 

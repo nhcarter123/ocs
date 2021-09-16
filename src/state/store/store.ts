@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import players from 'state/store/playerReducer';
+import tournaments from 'state/store/tournamentReducer';
 
 const persistConfig = {
   key: 'root',
@@ -12,7 +13,8 @@ const persistConfig = {
 const persistedReducer = persistReducer(
   persistConfig,
   combineReducers({
-    players
+    players,
+    tournaments
   })
 );
 const store = createStore(persistedReducer);

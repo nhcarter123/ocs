@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
-import { Button, Modal } from 'antd';
+import { Modal, Button } from 'antd';
 import AddPlayerForm from 'app/components/AddPlayerForm';
 
 // todo move to other folder
 const useStyles = makeStyles({
   root: {
+    marginTop: '40px'
+  },
+  button: {
     position: 'sticky',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    height: '60px'
+    height: '120px',
+    top: '64px'
   }
 });
 
@@ -22,10 +24,11 @@ const AddPlayerButton = (): JSX.Element => {
   const handleCancel = (): void => setIsModalVisible(false);
 
   return (
-    <>
-      <Button className={classes.root} type="primary" onClick={showModal}>
+    <div className={classes.root}>
+      <Button className={classes.button} type="primary" onClick={showModal}>
         Add Player
       </Button>
+
       <Modal
         title="Add Player"
         visible={isModalVisible}
@@ -34,7 +37,7 @@ const AddPlayerButton = (): JSX.Element => {
       >
         <AddPlayerForm />
       </Modal>
-    </>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ const AddTournamentButton = (): JSX.Element => {
   return (
     <>
       <Button className={classes.root} type="primary" onClick={showModal}>
-        Add Player
+        Add Tournament
       </Button>
       <Modal
         title="Add Player"
