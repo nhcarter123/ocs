@@ -1,6 +1,6 @@
 import React from 'react';
-import PlayersTable from 'app/components/PlayersTable';
-import AddPlayerButton from 'app/components/AddPlayerButton';
+import PlayersTable from 'app/components/tables/PlayersTable';
+import AddPlayerButton from 'app/components/buttons/AddPlayerButton';
 import { makeStyles } from '@material-ui/core';
 
 // todo move to other folder

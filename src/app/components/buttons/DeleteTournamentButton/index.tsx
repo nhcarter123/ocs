@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Popconfirm } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
-import { deletePlayerAction } from 'state/actions/player';
-import { DeletePlayerAction } from 'state/types/player';
+import TournamentActionsProvider from 'state/actions/tournamentActionsProvider';
+import { DeleteTournamentAction } from 'state/types/tournament';
 
 type DeletePlayerButtonProps = {
   id: string;
@@ -15,7 +15,9 @@ const DeletePlayerButton = (props: DeletePlayerButtonProps): JSX.Element => {
   return (
     <Popconfirm
       title="Are you sure?"
-      onConfirm={(): DeletePlayerAction => dispatch(deletePlayerAction(props))}
+      onConfirm={(): DeleteTournamentAction =>
+        dispatch(TournamentActionsProvider.delete(props))
+      }
     >
       <Button type="primary" shape="circle" icon={<DeleteOutlined />} />
     </Popconfirm>

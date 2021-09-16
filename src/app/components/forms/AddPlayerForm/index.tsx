@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from 'antd';
 
 import { makeStyles } from '@material-ui/core';
-import { createPlayerAction } from 'state/actions/player';
+import PlayerActionProvider from 'state/actions/playerActionsProvider';
 
 // todo move to other folder
 const useStyles = makeStyles({
@@ -50,7 +50,7 @@ const AddPlayerForm = (): JSX.Element => {
       onSubmit={(values, actions): void => {
         actions.setSubmitting(false);
 
-        dispatch(createPlayerAction(values));
+        dispatch(PlayerActionProvider.create(values));
       }}
     >
       {({

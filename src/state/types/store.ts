@@ -4,4 +4,5 @@ import { Tournament } from 'state/types/tournament';
 export type StateSchema = {
   players: Player[];
   tournaments: Tournament[];
+  activeTournament: Nullable<string>;
 };

@@ -4,11 +4,10 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import naturalCompare from 'string-natural-compare';
 import { StateSchema } from 'state/types/store';
-import moment from 'moment';
 
-import DeletePlayerButton from 'app/components/DeletePlayerButton';
+import DeletePlayerButton from 'app/components/buttons/DeletePlayerButton';
 
-import { Tournament } from 'state/types/tournament';
+import { Player } from 'state/types/player';
 
 // todo move to other folder
 const useStyles = makeStyles({
@@ -25,49 +24,47 @@ const useStyles = makeStyles({
 type EditableTableProps = Parameters<typeof Table>[0];
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-const TournamentsTable = (): JSX.Element => {
+const PlayersTable = (): JSX.Element => {
   const classes = useStyles();
-  const tournaments = useSelector((state: StateSchema) => state.tournaments);
+  const players = useSelector((state: StateSchema) => state.players);
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'First Name',
+      dataIndex: 'firstName',
       sorter: {
-        compare: (a: Tournament, b: Tournament): number =>
-          naturalCompare(a.name, b.name)
+        compare: (a: Player, b: Player): number =>
+          naturalCompare(a.firstName, b.firstName)
       }
     },
     {
-      date: 'Date',
-      dataIndex: 'date',
+      title: 'Last Name',
+      dataIndex: 'lastName',
       sorter: {
-        compare: (a: Tournament, b: Tournament): number =>
-          moment(a.date).unix() - moment(b.date).unix()
+        compare: (a: Player, b: Player): number =>
+          naturalCompare(a.lastName, b.lastName)
       }
     },
     {
-      title: 'Average Rating',
-      dataIndex: 'avgRating',
+      title: 'Rating',
+      dataIndex: 'rating',
       width: '15%',
       sorter: {
-        compare: (a: Tournament, b: Tournament): number =>
-          (a.avgRating || 0) - (b.avgRating || 0)
+        compare: (a: Player, b: Player): number => a.rating - b.rating
       }
     },
     {
-      title: 'Max Rating',
-      dataIndex: 'maxRating',
+      title: 'Matches',
+      dataIndex: 'matches',
       width: '15%',
       sorter: {
-        compare: (a: Tournament, b: Tournament): number =>
-          (a.maxRating || 0) - (b.maxRating || 0)
+        compare: (a: Player, b: Player): number => a.matches - b.matches
       }
     },
     {
       dataIndex: 'delete',
       width: '50px',
-      render: (_: any, record: Tournament): JSX.Element => (
+      render: (_: any, record: Player): JSX.Element => (
         <DeletePlayerButton id={record.id} />
       )
     }
@@ -78,7 +75,7 @@ const TournamentsTable = (): JSX.Element => {
       <Table
         sticky
         columns={columns as ColumnTypes}
-        dataSource={tournaments}
+        dataSource={players}
         size={'small'}
         pagination={{ pageSize: 50 }}
         className={classes.root}
@@ -87,4 +84,4 @@ const TournamentsTable = (): JSX.Element => {
     </div>
   );
 };
-export default TournamentsTable;
+export default PlayersTable;

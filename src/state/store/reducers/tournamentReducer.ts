@@ -22,12 +22,12 @@ export default (
     case TournamentActionTypes.createTournament:
       fn = TournamentService.create;
       args = { tournaments, payload: action.payload };
-      description = 'Player added successfully';
+      description = 'Tournament added successfully';
       break;
     case TournamentActionTypes.deleteTournament:
       fn = TournamentService.delete;
       args = { tournaments, payload: action.payload };
-      description = 'Player deleted successfully';
+      description = 'Tournament deleted successfully';
       break;
     default:
       return tournaments;

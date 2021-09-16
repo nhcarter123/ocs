@@ -9,14 +9,21 @@ import { Route, Redirect, useHistory } from 'react-router-dom';
 
 import PlayersPage from 'app/pages/PlayersPage';
 import TournamentsPage from 'app/pages/TournamentsPage';
+import ActiveTournamentPage from 'app/pages/ActiveTournamentPage';
 
 import { Pages } from 'app/types/pages';
+import { useSelector } from 'react-redux';
+import { StateSchema } from 'state/types/store';
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const PageLayout = (): JSX.Element => {
   const history = useHistory();
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const activeTournament = useSelector(
+    (state: StateSchema) => state.activeTournament
+  );
 
   const onCollapse = (isCollapsed: boolean): void =>
     setIsCollapsed(isCollapsed);
@@ -67,8 +74,17 @@ const PageLayout = (): JSX.Element => {
           >
             Tournaments
           </Menu.Item>
+          {activeTournament && (
+            <Menu.Item
+              key="3"
+              icon={<DesktopOutlined />}
+              onClick={(): void => history.push(Pages.tournaments)}
+            >
+              Tournaments
+            </Menu.Item>
+          )}
           <Menu.Item
-            key="3"
+            key="4"
             icon={<FileOutlined />}
             onClick={(): void => history.push(Pages.settings)}
           >
@@ -82,6 +98,10 @@ const PageLayout = (): JSX.Element => {
           <Redirect from={'/'} exact to={Pages.players} />
           <Route path={Pages.players} component={PlayersPage} />
           <Route path={Pages.tournaments} component={TournamentsPage} />
+          <Route
+            path={Pages.activeTournament}
+            component={ActiveTournamentPage}
+          />
         </Content>
 
         <Footer style={{ textAlign: 'center' }}>MIT License</Footer>
