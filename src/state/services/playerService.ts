@@ -3,12 +3,23 @@ import {
   Player,
   CreateParams,
   DeleteParams,
-  UpdateRatingParams
+  UpdateParams
 } from 'state/types/player';
 
 export default class PlayerService {
   static create(params: CreateParams): Player[] {
     const id = HashService.generate();
+
+    if (
+      params.players.some(
+        (player) =>
+          player.firstName === params.payload.firstName &&
+          player.lastName === params.payload.lastName &&
+          player.rating === params.payload.rating
+      )
+    ) {
+      throw new Error('Player already added');
+    }
 
     return [...params.players, { id, matches: 0, ...params.payload }];
   }
@@ -17,12 +28,12 @@ export default class PlayerService {
     return params.players.filter((player) => player.id !== params.payload.id);
   }
 
-  static updateRating(params: UpdateRatingParams): Player[] {
+  static update(params: UpdateParams): Player[] {
     return params.players.map((player) =>
       player.id === params.payload.id
         ? {
-            ...player,
-            rating: params.payload.rating
+            ...params.payload,
+            ...player
           }
         : player
     );

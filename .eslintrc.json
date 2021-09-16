@@ -24,6 +24,7 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "indent": "off",
         "semi": [2, "always"],
         "space-before-function-paren": "off",
         "no-use-before-define": "off",

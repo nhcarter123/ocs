@@ -48,7 +48,7 @@ export type DeleteParams = {
   payload: DeletePlayerPayload;
 };
 
-export type UpdateRatingParams = {
+export type UpdateParams = {
   players: Player[];
-  payload: UpdateRatingPayload;
+  payload: Partial<Player>;
 };
