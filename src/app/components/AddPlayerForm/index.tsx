@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from 'antd';
 
 import { makeStyles } from '@material-ui/styles';
-import { createPlayerAction } from 'app/actions/player';
+import { createPlayerAction } from 'state/actions/player';
 
 // todo move to other folder
 const useStyles = makeStyles({
