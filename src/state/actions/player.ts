@@ -2,20 +2,20 @@ import {
   CreatePlayerAction,
   CreatePlayerPayload,
   DeletePlayerAction,
-  DeletePlayerPayload
+  DeletePlayerPayload,
+  PlayerActionTypes
 } from 'state/types/player';
-import { ActionTypes } from 'state/types/store';
 
 export const createPlayerAction = (
   params: CreatePlayerPayload
 ): CreatePlayerAction => ({
-  type: ActionTypes.createPlayer,
+  type: PlayerActionTypes.createPlayer,
   payload: params
 });
 
 export const deletePlayerAction = (
   params: DeletePlayerPayload
 ): DeletePlayerAction => ({
-  type: ActionTypes.deletePlayer,
+  type: PlayerActionTypes.deletePlayer,
   payload: params
 });

@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   }
 });
 
-const AddPlayerButton = (): JSX.Element => {
+const AddTournamentButton = (): JSX.Element => {
   const classes = useStyles();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -38,4 +38,4 @@ const AddPlayerButton = (): JSX.Element => {
   );
 };
 
-export default AddPlayerButton;
+export default AddTournamentButton;

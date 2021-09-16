@@ -1,21 +1,7 @@
-import {
-  Player,
-  CreatePlayerAction,
-  DeletePlayerAction,
-  UpdatePlayerRatingAction
-} from 'state/types/player';
+import { Player } from 'state/types/player';
+import { Tournament } from 'state/types/tournament';
 
 export type StateSchema = {
   players: Player[];
+  tournaments: Tournament[];
 };
-
-export enum ActionTypes {
-  deletePlayer = 'deletePlayer',
-  createPlayer = 'createPlayer',
-  updateRating = 'updateRating'
-}
-
-export type CustomAction =
-  | CreatePlayerAction
-  | UpdatePlayerRatingAction
-  | DeletePlayerAction;

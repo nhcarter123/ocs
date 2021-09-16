@@ -1,5 +1,3 @@
-import { ActionTypes } from 'state/types/store';
-
 export type Player = {
   id: string;
   firstName: string;
@@ -24,17 +22,17 @@ export type UpdateRatingPayload = {
 };
 
 export type CreatePlayerAction = {
-  type: ActionTypes.createPlayer;
+  type: PlayerActionTypes.createPlayer;
   payload?: CreatePlayerPayload;
 };
 
 export type DeletePlayerAction = {
-  type: ActionTypes.deletePlayer;
+  type: PlayerActionTypes.deletePlayer;
   payload?: DeletePlayerPayload;
 };
 
 export type UpdatePlayerRatingAction = {
-  type: ActionTypes.updateRating;
+  type: PlayerActionTypes.updateRating;
   payload?: UpdateRatingPayload;
 };
 
@@ -52,3 +50,14 @@ export type UpdateParams = {
   players: Player[];
   payload: Partial<Player>;
 };
+
+export enum PlayerActionTypes {
+  createPlayer = 'createPlayer',
+  updateRating = 'updateRating',
+  deletePlayer = 'deletePlayer'
+}
+
+export type PlayerAction =
+  | CreatePlayerAction
+  | UpdatePlayerRatingAction
+  | DeletePlayerAction;

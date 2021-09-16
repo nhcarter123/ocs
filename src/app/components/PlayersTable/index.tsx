@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
 import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
 import naturalCompare from 'string-natural-compare';
 import { StateSchema } from 'state/types/store';
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 type EditableTableProps = Parameters<typeof Table>[0];
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-const App = (): JSX.Element => {
+const PlayersTable = (): JSX.Element => {
   const classes = useStyles();
   const players = useSelector((state: StateSchema) => state.players);
 
@@ -84,4 +84,4 @@ const App = (): JSX.Element => {
     </div>
   );
 };
-export default App;
+export default PlayersTable;

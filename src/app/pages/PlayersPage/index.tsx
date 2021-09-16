@@ -1,21 +1,24 @@
 import React from 'react';
-import PlayersList from 'app/components/PlayersList';
+import PlayersTable from 'app/components/PlayersTable';
 import AddPlayerButton from 'app/components/AddPlayerButton';
+import { makeStyles } from '@material-ui/core';
 
-// todo use makeStyles
-
+// todo move to other folder
+const useStyles = makeStyles({
+  root: {
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: 'auto minmax(0, 1fr)',
+    gap: '20px'
+  }
+});
 const PlayersPage = (): JSX.Element => {
+  const classes = useStyles();
+
   return (
-    <div
-      style={{
-        display: 'grid',
-        justifyContent: 'center',
-        gridTemplateColumns: 'auto minmax(0, 1fr)',
-        gap: '20px'
-      }}
-    >
+    <div className={classes.root}>
       <AddPlayerButton />
-      <PlayersList />
+      <PlayersTable />
     </div>
   );
 };

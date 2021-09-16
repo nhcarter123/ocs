@@ -14,7 +14,7 @@ import { Pages } from 'app/types/pages';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-const App = (): JSX.Element => {
+const PageLayout = (): JSX.Element => {
   const history = useHistory();
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -34,7 +34,7 @@ const App = (): JSX.Element => {
           textAlign: 'center'
         }}
       >
-        TEST
+        Tournament Software Name
       </Header>
 
       <Sider
@@ -90,4 +90,4 @@ const App = (): JSX.Element => {
   );
 };
 
-export default App;
+export default PageLayout;
