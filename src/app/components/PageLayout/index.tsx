@@ -5,15 +5,15 @@ import {
   UserOutlined,
   SettingOutlined
 } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 import { Route, Redirect, useHistory } from 'react-router-dom';
 
-import PlayersPage from 'app/pages/general/PlayersPage';
-import TournamentsPage from 'app/pages/general/TournamentsPage';
-import ActiveTournamentPage from 'app/pages/general/ActiveTournamentPage';
-import SettingsPage from 'app/pages/general/SettingsPage';
+import PlayersPage from 'app/components/pages/general/PlayersPage';
+import TournamentsPage from 'app/components/pages/general/TournamentsPage';
+import ActiveTournamentPage from 'app/components/pages/general/ActiveTournamentPage';
 
+import SettingsPage from 'app/components/pages/general/SettingsPage';
 import { Pages } from 'app/types/pages';
-import { useSelector } from 'react-redux';
 import { StateSchema } from 'state/types/store';
 
 const { Header, Content, Footer, Sider } = Layout;

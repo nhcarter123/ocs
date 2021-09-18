@@ -2,14 +2,15 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { Redirect, Route } from 'react-router-dom';
 import { find } from 'lodash';
-
-import { useSelector } from 'react-redux';
-import { StateSchema } from 'state/types/store';
-import { makeStyles } from '@material-ui/core';
-
-import { Pages } from 'app/types/pages';
-import PoolsPage from 'app/pages/tournament/PoolsPage';
 import { History } from 'history';
+import { makeStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
+
+import { StateSchema } from 'state/types/store';
+import { Pages } from 'app/types/pages';
+
+import PoolsPage from 'app/components/pages/tournament/PoolsPage';
+import ContentHeader from 'app/components/ContentHeader';
 
 const { Header, Content } = Layout;
 
@@ -17,14 +18,6 @@ const { Header, Content } = Layout;
 const useStyles = makeStyles({
   root: {
     padding: '2px'
-  },
-  nameWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: 'white',
-    borderBottom: '1px solid #e4e4e4',
-    height: '42px'
   },
   header: {
     position: 'fixed',
@@ -50,7 +43,7 @@ const ActiveTournamentPage = (props: TournamentPageProps): JSX.Element => {
 
   return tournament ? (
     <div className={classes.root}>
-      <div className={classes.nameWrapper}>{tournament.name}</div>
+      <ContentHeader title={tournament.name} />
       <Layout>
         <Header className={classes.header}>
           <Menu theme="light" mode="horizontal" defaultSelectedKeys={['2']}>

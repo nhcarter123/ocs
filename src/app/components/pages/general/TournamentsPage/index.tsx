@@ -3,6 +3,7 @@ import AddTournamentButton from 'app/components/buttons/AddTournamentButton';
 import TournamentsTable from 'app/components/tables/TournamentsTable';
 import { History } from 'history';
 import { makeStyles } from '@material-ui/core';
+import ContentHeader from 'app/components/ContentHeader';
 
 type TournamentPageProps = {
   history: History;
@@ -22,9 +23,12 @@ const TournamentsPage = (props: TournamentPageProps): JSX.Element => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <AddTournamentButton />
-      <TournamentsTable history={props.history} />
+    <div>
+      <ContentHeader title={'Tournaments'} />
+      <div className={classes.root}>
+        <AddTournamentButton />
+        <TournamentsTable history={props.history} />
+      </div>
     </div>
   );
 };
