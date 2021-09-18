@@ -1,5 +1,5 @@
 import {
-  TournamentActionTypes,
+  ActiveTournamentActionTypes,
   ActiveTournamentAction
 } from 'state/types/activeTournament';
 
@@ -12,9 +12,9 @@ export default (
   }
 
   switch (action.type) {
-    case TournamentActionTypes.setActiveTournament:
+    case ActiveTournamentActionTypes.setActiveTournament:
       return action.payload.id;
-    case TournamentActionTypes.unsetActiveTournament:
+    case ActiveTournamentActionTypes.unsetActiveTournament:
       return null;
     default:
       return activeTournament;

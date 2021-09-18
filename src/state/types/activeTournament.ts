@@ -5,16 +5,16 @@ export type SetActiveTournamentPayload = {
 export type UnsetActiveTournamentPayload = {};
 
 export type SetActiveTournamentAction = {
-  type: TournamentActionTypes.setActiveTournament;
+  type: ActiveTournamentActionTypes.setActiveTournament;
   payload?: SetActiveTournamentPayload;
 };
 
 export type UnsetActiveTournamentAction = {
-  type: TournamentActionTypes.unsetActiveTournament;
+  type: ActiveTournamentActionTypes.unsetActiveTournament;
   payload?: UnsetActiveTournamentPayload;
 };
 
-export enum TournamentActionTypes {
+export enum ActiveTournamentActionTypes {
   setActiveTournament = 'setActiveTournament',
   unsetActiveTournament = 'unsetActiveTournament'
 }

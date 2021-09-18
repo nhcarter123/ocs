@@ -6,7 +6,7 @@ import {
   TournamentActionTypes
 } from 'state/types/tournament';
 
-export default class PlayerActionsProvider {
+export default class TournamentActionsProvider {
   static create(params: CreateTournamentPayload): CreateTournamentAction {
     return {
       type: TournamentActionTypes.createTournament,

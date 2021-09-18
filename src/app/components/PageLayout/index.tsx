@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined
+  ApartmentOutlined,
+  UserOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 import { Route, Redirect, useHistory } from 'react-router-dom';
 
-import PlayersPage from 'app/pages/PlayersPage';
-import TournamentsPage from 'app/pages/TournamentsPage';
-import ActiveTournamentPage from 'app/pages/ActiveTournamentPage';
+import PlayersPage from 'app/pages/general/PlayersPage';
+import TournamentsPage from 'app/pages/general/TournamentsPage';
+import ActiveTournamentPage from 'app/pages/general/ActiveTournamentPage';
+import SettingsPage from 'app/pages/general/SettingsPage';
 
 import { Pages } from 'app/types/pages';
 import { useSelector } from 'react-redux';
@@ -20,6 +21,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const PageLayout = (): JSX.Element => {
   const history = useHistory();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState(['2']);
 
   const activeTournament = useSelector(
     (state: StateSchema) => state.activeTournament
@@ -27,6 +29,16 @@ const PageLayout = (): JSX.Element => {
 
   const onCollapse = (isCollapsed: boolean): void =>
     setIsCollapsed(isCollapsed);
+
+  history.listen((event) => {
+    const pathname = event.pathname as Pages;
+
+    const index = Object.values(Pages).indexOf(pathname);
+
+    if (index < 4) {
+      setSelectedKeys([(index + 1).toString()]);
+    }
+  });
 
   // todo replace these styles with makestyles
   return (
@@ -59,33 +71,33 @@ const PageLayout = (): JSX.Element => {
         }}
       >
         <div className="logo" />
-        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+        <Menu theme="light" selectedKeys={selectedKeys} mode="inline">
+          {activeTournament && (
+            <Menu.Item
+              key="1"
+              icon={<ApartmentOutlined />}
+              onClick={(): void => history.push(Pages.activeTournament)}
+            >
+              Active Tournament
+            </Menu.Item>
+          )}
           <Menu.Item
-            key="1"
-            icon={<PieChartOutlined />}
+            key="2"
+            icon={<UserOutlined />}
             onClick={(): void => history.push(Pages.players)}
           >
             Players
           </Menu.Item>
           <Menu.Item
-            key="2"
-            icon={<DesktopOutlined />}
+            key="3"
+            icon={<ApartmentOutlined />}
             onClick={(): void => history.push(Pages.tournaments)}
           >
             Tournaments
           </Menu.Item>
-          {activeTournament && (
-            <Menu.Item
-              key="3"
-              icon={<DesktopOutlined />}
-              onClick={(): void => history.push(Pages.tournaments)}
-            >
-              Tournaments
-            </Menu.Item>
-          )}
           <Menu.Item
             key="4"
-            icon={<FileOutlined />}
+            icon={<SettingOutlined />}
             onClick={(): void => history.push(Pages.settings)}
           >
             Settings
@@ -94,14 +106,22 @@ const PageLayout = (): JSX.Element => {
       </Sider>
 
       <Layout className="site-layout" style={{ marginTop: 64 }}>
-        <Content style={{ minHeight: 280, padding: '0 40px' }}>
+        <Content style={{ padding: '0 40px' }}>
           <Redirect from={'/'} exact to={Pages.players} />
-          <Route path={Pages.players} component={PlayersPage} />
-          <Route path={Pages.tournaments} component={TournamentsPage} />
           <Route
             path={Pages.activeTournament}
-            component={ActiveTournamentPage}
+            render={(props): JSX.Element => (
+              <ActiveTournamentPage {...props} history={history} />
+            )}
           />
+          <Route path={Pages.players} component={PlayersPage} />
+          <Route
+            path={Pages.tournaments}
+            render={(props): JSX.Element => (
+              <TournamentsPage {...props} history={history} />
+            )}
+          />
+          <Route path={Pages.settings} component={SettingsPage} />
         </Content>
 
         <Footer style={{ textAlign: 'center' }}>MIT License</Footer>

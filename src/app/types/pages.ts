@@ -1,6 +1,10 @@
 export enum Pages {
+  activeTournament = '/activeTournament',
   players = '/players',
   tournaments = '/tournaments',
-  activeTournament = '/activeTournament',
-  settings = '/settings'
+  settings = '/settings',
+  pools = '/activeTournament/pools',
+  tournamentPlayers = '/activeTournament/players',
+  rounds = '/activeTournament/rounds',
+  crosstable = '/activeTournament/crosstable'
 }

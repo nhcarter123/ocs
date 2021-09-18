@@ -1,14 +1,17 @@
 import React from 'react';
 import { Table } from 'antd';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import naturalCompare from 'string-natural-compare';
 import { StateSchema } from 'state/types/store';
 import moment from 'moment';
+import { History } from 'history';
 
 import DeleteTournamentButton from 'app/components/buttons/DeleteTournamentButton';
 
 import { Tournament } from 'state/types/tournament';
+import ActiveTournamentActionsProvider from 'state/actions/activeTournamentActionsProvider';
+import { Pages } from 'app/types/pages';
 
 // todo move to other folder
 const useStyles = makeStyles({
@@ -25,9 +28,15 @@ const useStyles = makeStyles({
 type EditableTableProps = Parameters<typeof Table>[0];
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-const TournamentsTable = (): JSX.Element => {
+type TournamentsTableProps = {
+  history: History;
+};
+
+const TournamentsTable = (props: TournamentsTableProps): JSX.Element => {
   const classes = useStyles();
   const tournaments = useSelector((state: StateSchema) => state.tournaments);
+
+  const dispatch = useDispatch();
 
   const columns = [
     {
@@ -36,7 +45,17 @@ const TournamentsTable = (): JSX.Element => {
       sorter: {
         compare: (a: Tournament, b: Tournament): number =>
           naturalCompare(a.name, b.name)
-      }
+      },
+      render: (name: string, record: Tournament): JSX.Element => (
+        <a
+          onClick={(): void => {
+            dispatch(ActiveTournamentActionsProvider.set({ id: record.id }));
+            props.history.push(Pages.activeTournament);
+          }}
+        >
+          {name}
+        </a>
+      )
     },
     {
       title: 'Date',
