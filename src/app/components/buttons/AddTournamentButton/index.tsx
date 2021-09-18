@@ -6,10 +6,7 @@ import AddTournamentForm from 'app/components/forms/AddTournamentForm';
 // todo move to other folder
 const useStyles = makeStyles({
   root: {
-    position: 'sticky',
-    top: '50%',
-    transform: 'translate(0, -50%)',
-    height: '60px'
+    marginRight: '8px'
   }
 });
 

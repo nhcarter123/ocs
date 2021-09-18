@@ -6,12 +6,7 @@ import AddPlayerForm from 'app/components/forms/AddPlayerForm';
 // todo move to other folder
 const useStyles = makeStyles({
   root: {
-    marginTop: '40px'
-  },
-  button: {
-    position: 'sticky',
-    height: '120px',
-    top: '64px'
+    marginRight: '8px'
   }
 });
 
@@ -24,8 +19,8 @@ const AddPlayerButton = (): JSX.Element => {
   const handleCancel = (): void => setIsModalVisible(false);
 
   return (
-    <div className={classes.root}>
-      <Button className={classes.button} type="primary" onClick={showModal}>
+    <div>
+      <Button className={classes.root} type="primary" onClick={showModal}>
         Add Player
       </Button>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
@@ -8,6 +8,8 @@ import moment from 'moment';
 import { History } from 'history';
 
 import DeleteTournamentButton from 'app/components/buttons/DeleteTournamentButton';
+import TableSearchBar from 'app/components/TableSearchBar';
+import AddTournamentButton from 'app/components/buttons/AddTournamentButton';
 
 import { Tournament } from 'state/types/tournament';
 import ActiveTournamentActionsProvider from 'state/actions/activeTournamentActionsProvider';
@@ -15,12 +17,10 @@ import { Pages } from 'app/types/pages';
 
 // todo move to other folder
 const useStyles = makeStyles({
-  root: {
-    maxWidth: '1200px',
-    margin: 'auto',
-    marginTop: '40px',
+  root: { maxWidth: '1000px', margin: 'auto' },
+  table: {
     '& .ant-table-sticky-holder': {
-      top: '64px !important'
+      top: '104px !important'
     }
   }
 });
@@ -34,7 +34,22 @@ type TournamentsTableProps = {
 
 const TournamentsTable = (props: TournamentsTableProps): JSX.Element => {
   const classes = useStyles();
-  const tournaments = useSelector((state: StateSchema) => state.tournaments);
+  const [filterTerm, setFilterTerm] = useState('');
+
+  const tournaments = useSelector((state: StateSchema) => {
+    if (!filterTerm.length) {
+      return state.tournaments;
+    }
+
+    return state.tournaments.filter(
+      (tournament) =>
+        tournament.name.toLowerCase().includes(filterTerm) ||
+        moment(tournament.date)
+          .format('MMMM Do, YYYY')
+          .toLowerCase()
+          .includes(filterTerm)
+    );
+  });
 
   const dispatch = useDispatch();
 
@@ -94,15 +109,19 @@ const TournamentsTable = (props: TournamentsTableProps): JSX.Element => {
   ];
 
   return (
-    <div>
+    <div className={classes.root}>
+      <TableSearchBar
+        renderButton={(): JSX.Element => <AddTournamentButton />}
+        setFilterTerm={setFilterTerm}
+      />
       <Table
-        sticky
+        className={classes.table}
         columns={columns as ColumnTypes}
         dataSource={tournaments}
         size={'small'}
         pagination={{ pageSize: 50 }}
-        className={classes.root}
         rowKey={'id'}
+        sticky
       />
     </div>
   );

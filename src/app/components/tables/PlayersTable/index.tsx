@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'antd';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
 import naturalCompare from 'string-natural-compare';
 import { StateSchema } from 'state/types/store';
 
+import AddPlayerButton from 'app/components/buttons/AddPlayerButton';
 import DeletePlayerButton from 'app/components/buttons/DeletePlayerButton';
+import TableSearchBar from 'app/components/TableSearchBar';
 
 import { Player } from 'state/types/player';
 
 // todo move to other folder
 const useStyles = makeStyles({
-  root: {
-    maxWidth: '1200px',
-    margin: 'auto',
-    marginTop: '40px',
+  root: { maxWidth: '1000px', margin: 'auto' },
+  table: {
     '& .ant-table-sticky-holder': {
-      top: '64px !important'
+      top: '104px !important'
     }
   }
 });
@@ -26,7 +26,20 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
 const PlayersTable = (): JSX.Element => {
   const classes = useStyles();
-  const players = useSelector((state: StateSchema) => state.players);
+  const [filterTerm, setFilterTerm] = useState('');
+
+  const players = useSelector((state: StateSchema) => {
+    if (!filterTerm.length) {
+      return state.players;
+    }
+
+    return state.players.filter(
+      (player) =>
+        player.firstName.toLowerCase().includes(filterTerm) ||
+        player.lastName.toLowerCase().includes(filterTerm) ||
+        player.rating.toString().includes(filterTerm)
+    );
+  });
 
   const columns = [
     {
@@ -71,14 +84,18 @@ const PlayersTable = (): JSX.Element => {
   ];
 
   return (
-    <div>
+    <div className={classes.root}>
+      <TableSearchBar
+        renderButton={(): JSX.Element => <AddPlayerButton />}
+        setFilterTerm={setFilterTerm}
+      />
       <Table
+        className={classes.table}
         sticky
         columns={columns as ColumnTypes}
         dataSource={players}
         size={'small'}
         pagination={{ pageSize: 50 }}
-        className={classes.root}
         rowKey={'id'}
       />
     </div>
